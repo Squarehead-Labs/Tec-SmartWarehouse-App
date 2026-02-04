@@ -36,3 +36,26 @@ void setup() {
 void loop() {
   // Nada
 }
+
+
+// #include <Adafruit_Fingerprint.h>
+
+// Adafruit_Fingerprint finger = Adafruit_Fingerprint(&Serial1);
+
+// void setup() {
+//   Serial.begin(9600);      // Monitor Serial (USB)
+//   Serial1.begin(57600);    // JM-101B (baudrate más común)
+
+//   delay(2000);
+//   Serial.println("Probando lector JM-101B...");
+
+//   if (finger.verifyPassword()) {
+//     Serial.println("✅ Lector detectado y funcionando");
+//   } else {
+//     Serial.println("❌ No se detecta el lector");
+//   }
+// }
+
+// void loop() {
+// }
+
