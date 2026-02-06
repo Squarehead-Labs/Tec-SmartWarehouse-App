@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 
-const char* ssid = "Totalplay-2.4G-d370";
-const char* password = "6LUhQH3g6eCyFp86";
+const char* ssid = "TecNM/ITM_WIFI-cloud";
+const char* password = "";
 int counter = 0;
 
 
@@ -162,3 +162,7 @@ void setup() {
 void loop() {
   server.handleClient(); // MUY IMPORTANTE
 }
+
+// morado rx
+// 10.124.7.174
+// blanco tx

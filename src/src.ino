@@ -6,6 +6,7 @@
 #include "RTClib.h"
 #include <LiquidCrystal_I2C.h>
 #include <Adafruit_Fingerprint.h>
+#include <ezButton.h>
 
 
 // ====== COMUNICACION CON ESP ............................................................................................
@@ -111,6 +112,13 @@ int loopCounter = 0;
 
 
 
+// ====== SWITCHES ......................................................................................................
+ezButton top1(7);
+ezButton top2(8);
+ezButton bot1(9);
+ezButton bot2(10);
+
+
 
 
 // ======= FLUJO PRINCIPAL ................................................................................................
@@ -172,6 +180,11 @@ void setup()
 
   // writeSystem("INFO-COMP: STARTING CLOCK (DS3231)");
 
+  top1.setDebounceTime(50);
+  top2.setDebounceTime(50);
+  bot1.setDebounceTime(50);
+  bot2.setDebounceTime(50);
+
   for (int i = 29; i <= 43; i += 2) {
     // Serial.println(i);
     pinMode(i, INPUT_PULLUP);
@@ -182,7 +195,39 @@ void setup()
 
 void loop()
 {
+  top1.loop();
+  top2.loop();
+  bot1.loop();
+  bot2.loop();
 
+  // INNER SWITCHES
+  if(top1.isPressed())
+    writeActivity("SWITCH: TOP LEFT SWITCH IS IN USE");
+
+  if(top1.isReleased())
+    writeActivity("SWITCH: TOP LEFT SWITCH IS REMOVED");
+
+  if(top2.isPressed())
+    writeActivity("SWITCH: TOP RIGHT SWITCH IS IN USE");
+
+  if(top2.isReleased())
+    writeActivity("SWITCH: TOP RIGHT SWITCH IS REMOVED");
+
+
+  if(bot1.isPressed())
+    writeActivity("SWITCH: BOT LEFT SWITCH IS IN USE");
+
+  if(bot1.isReleased())
+    writeActivity("SWITCH: BOT LEFT SWITCH IS REMOVED");
+
+  if(bot2.isPressed())
+    writeActivity("SWITCH: BOT RIGHT SWITCH IS IN USE");
+
+  if(bot2.isReleased())
+    writeActivity("SWITCH: BOT RIGHT SWITCH IS REMOVED");
+
+
+  // PANEL BUTTONS
   if (digitalRead(BTN_SCAN) == LOW) {
     writeActivity("BUTTON: SCAN BUTTON PRESS");
     tone(BUZZER, 440, 500);
@@ -213,7 +258,7 @@ void loop()
     if(loopCounter == 1) {
       lcd.clear();
       lcdPrintRow(0, "TEC SMART WARE");
-      lcdPrintRow(1, "192.168.100.27");
+      lcdPrintRow(1, "10.124.7.174:3000");
     }
     loopCounter++;
   } else {
